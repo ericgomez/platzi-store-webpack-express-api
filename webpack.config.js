@@ -1,9 +1,15 @@
 const path = require('path'); // path: la ubicacion del proyecto
+const nodeExternals = require('webpack-node-externals');
+
+const NODE_ENV = process.env.NODE_ENV;
+const PORT = process.env.PORT;
 
 module.exports = { //module.export: la info de nuestra configuracion webpack
     name: 'express-server', //name: nombre del proyecto
-    entry: './src/index.js', // entry: punto de entrada de nuestra aplicacion
+    entry: './src/index.ts', // entry: punto de entrada de nuestra aplicacion
     target: 'node',
+    mode: NODE_ENV, // AÑADIMOS: mode
+    externals: [nodeExternals()],
     output: { //output: donde guardamos el recurso que fue modularizado por webpack
         path: path.resolve(__dirname, 'dist'), 
         //path: ubicacion del guardado
@@ -13,7 +19,7 @@ module.exports = { //module.export: la info de nuestra configuracion webpack
     },
     resolve: {
         // extensions: con que extensiones trabajaremos
-        extensions: ['.js']
+        extensions: ['.ts','.js']
     },
     module: {
         rules: [ 
@@ -25,6 +31,12 @@ module.exports = { //module.export: la info de nuestra configuracion webpack
                 use: {
                     loader: 'babel-loader' // Utilizamos el loader
                 }
+            },
+            {
+                test: /\.ts$/, // Identificamos las extenciones en las que estareamos aplicando el loader
+                use: [
+                    'ts-loader', // Utilizamos el loader
+                ]
             }
         ]
     }
