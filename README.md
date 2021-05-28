@@ -14,11 +14,10 @@
 
 ## Despliegue 📦
 
-_Iniciamos mogoDB_
+_Iniciamos API_
 
 ```
 http://localhost:3005/api/v1
-
 ```
 ## Proyecto Platzi Store con Webpack
 Este proyecto es la Api de complemento del proyecto de **Platzi Store con Webpack**
